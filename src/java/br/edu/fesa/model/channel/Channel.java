@@ -61,7 +61,7 @@ public abstract class Channel {
         }
     }
     
-    protected double returnResponseModule(int frequency){
+    public double returnResponseModule(double frequency){
         return 0;
     }
     
@@ -75,7 +75,7 @@ public abstract class Channel {
         }
     }
     
-    protected double returnResponsePhase(int frequency){
+    public double returnResponsePhase(double frequency){
         return 0;
     }
     

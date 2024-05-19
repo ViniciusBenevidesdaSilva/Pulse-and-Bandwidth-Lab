@@ -24,4 +24,9 @@ public class SquareSignal extends Signal {
     protected double returnPhase(int harmonic){
         return harmonic % 2 == 0 ? 0 : - PI / 2;
     }
+        
+    @Override
+    protected double returnPhase(int harmonic, double chanelPhase){
+        return harmonic % 2 == 0 ? 0 : super.returnPhase(harmonic, chanelPhase);
+    }
 }

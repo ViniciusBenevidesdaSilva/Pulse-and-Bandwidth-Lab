@@ -110,11 +110,10 @@ function exibeResult(result){
 
     atualizarGraficoLinha(result.channel.responseModule, 'modulo-canal', 'Modulo da resposta em Frequência', 'Frequência (kHz)', 'Amplitude', '#ff0055');    
     atualizarGraficoLinha(result.channel.responsePhase, 'fase-canal', 'Fase da resposta em Frequência', 'Frequência (kHz)', 'Fase (radianos)', '#ff0055');    
-    /*
+    
     atualizarGraficoLinha(result.received.signal, 'sinal-recebido', 'Sinal Recebido', 'Tempo (ms)', 'Amplitude', '#2be331');    
     atualizarGraficoBarras(result.received.amplitude, 'modulo-recebido', 'Módulo da Resposta em frequência Recebido', 'Frequência (kHz)', 'Amplitude', '#2be331');    
     atualizarGraficoBarras(result.received.phase, 'fase-recebido', 'Fase da Resposta em frequência Recebido', 'Frequência (kHz)', 'Fase (radianos)', '#2be331');
-    */
 }
 
 function atualizarGraficoLinha(dados, grafico, nome, xName, yName, cor) {

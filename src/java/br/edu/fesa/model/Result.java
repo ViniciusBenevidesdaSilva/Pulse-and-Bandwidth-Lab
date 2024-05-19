@@ -13,6 +13,7 @@ public class Result {
     
     private Signal emitted = null;
     private Channel channel = null;
+    private Signal received = null;
     
     public Result(){
         
@@ -25,15 +26,19 @@ public class Result {
     public Result(double frequency, double minFrequency, double maxFrequency, EnumSignalType signalType) throws IllegalArgumentException{
         this.emitted = Signal.returnSignalByType(signalType, frequency);
         this.channel = Channel.returnChannelByFrequency(minFrequency, maxFrequency);
+        this.received = Signal.returnSignalByType(signalType, frequency);
     }
 
     public Signal getEmitted() {
         return emitted;
     }
-
     public Channel getChannel() {
         return channel;
     }
+    public Signal getReceived() {
+        return received;
+    }
+    
     
     public String getError() {
         return error;

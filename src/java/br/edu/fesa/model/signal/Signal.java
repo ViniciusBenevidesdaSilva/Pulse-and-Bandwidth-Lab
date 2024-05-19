@@ -2,6 +2,7 @@
 package br.edu.fesa.model.signal;
 
 import br.edu.fesa.model.Point;
+import br.edu.fesa.model.channel.Channel;
 import br.edu.fesa.utils.Const;
 import br.edu.fesa.utils.EnumSignalType;
 import java.util.ArrayList;
@@ -69,10 +70,23 @@ public abstract class Signal {
             insertPointAt(amplitude, harmonic * frequency, amplitudeValue);
         }
     }
-    
     // Método que será sobreescrito, que efetivamente realiza o calculo da amplitude
     protected double returnAmplitude(int harmonic){
         return 0;
+    }
+    
+    public void fillAmplitudeList(Channel channel){
+        amplitude.clear();
+        double amplitudeValue, channelModule;
+        
+        for(int harmonic = 0; harmonic <= Const.HARMONIC; harmonic++){
+            channelModule = channel.returnResponseModule(frequency * harmonic);
+            amplitudeValue = returnAmplitude(harmonic, channelModule);
+            insertPointAt(amplitude, harmonic * frequency, amplitudeValue);
+        }
+    }
+    protected double returnAmplitude(int harmonic, double channelModule){
+        return returnAmplitude(harmonic) * channelModule;
     }
     
     
@@ -86,11 +100,25 @@ public abstract class Signal {
             phaseValue = returnPhase(harmonic);
             insertPointAt(phase, harmonic * frequency, phaseValue);
         }
-    }
-    
+    }  
     // Método que será sobreescrito, que efetivamente realiza o calculo da fase
     protected double returnPhase(int harmonic){
         return 0;
+    }
+        
+    public void fillPhaseList(Channel channel){
+        phase.clear();
+        double phaseValue, channelPhase;
+        
+        for(int harmonic = 0; harmonic <= Const.HARMONIC; harmonic++){
+            channelPhase = channel.returnResponsePhase(frequency * harmonic);
+            phaseValue = returnPhase(harmonic, channelPhase);
+            insertPointAt(phase, harmonic * frequency, phaseValue);
+        }
+    }
+      
+    protected double returnPhase(int harmonic, double chanelPhase){
+        return returnPhase(harmonic) + chanelPhase;
     }
     
     // Signal

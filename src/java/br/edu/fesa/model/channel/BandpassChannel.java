@@ -9,7 +9,7 @@ public class BandpassChannel extends Channel {
     }
     
     @Override
-    protected double returnResponseModule(int frequency){
+    public double returnResponseModule(double frequency){
         return frequency / (minFrequency * Math.sqrt(
                 (1 + Math.pow((frequency / minFrequency), 2)) *
                 (1 + Math.pow((frequency / maxFrequency), 2))
@@ -17,7 +17,7 @@ public class BandpassChannel extends Channel {
     }
     
     @Override
-    protected double returnResponsePhase(int frequency){
+    public double returnResponsePhase(double frequency){
         return - Math.PI / 2 - Math.atan((frequency * (minFrequency + maxFrequency))
                 / ((minFrequency * maxFrequency) - frequency * frequency));
     }

@@ -62,8 +62,14 @@ public class PBLController extends HttpServlet {
         result.getChannel().fillResponseModule(frequency);
         result.getChannel().fillResponsePhase(frequency);
         
+        // Received
+        result.getReceived().fillAmplitudeList(result.getChannel());
+        result.getReceived().fillPhaseList(result.getChannel());
+        result.getReceived().fillSignalList();
+        
         // Normalização para exibição
         result.getEmitted().normalizeFrequencyLists();
         result.getChannel().normalizeFrequencyLists();
+        result.getReceived().normalizeFrequencyLists();
     }
 }
