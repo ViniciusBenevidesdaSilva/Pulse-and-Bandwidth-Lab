@@ -44,8 +44,10 @@ public abstract class Signal {
     
     // Método que, após a realização dos cálculos, exibe apenas os 10 primeiros valores de amplitude e fase por frequência
     public void normalizeFrequencyLists(){
-        amplitude = amplitude.subList(0, 20);
-        phase = phase.subList(0, 20);
+        int elementQuantity = Math.min(20, Const.HARMONIC);
+
+        amplitude = amplitude.subList(0, elementQuantity);
+        phase = phase.subList(0, elementQuantity);
     }
     
     // Método generico que realiza a inserção de um ponto em uma lista

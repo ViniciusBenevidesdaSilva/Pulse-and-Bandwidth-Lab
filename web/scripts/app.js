@@ -107,10 +107,10 @@ function exibeResult(result){
     atualizarGraficoBarras(result.emitted.amplitude, 'modulo-emitido', 'Módulo da Resposta em frequência Emitido', 'Frequência (kHz)', 'Amplitude', '#00c8ff');    
     atualizarGraficoBarras(result.emitted.phase, 'fase-emitido', 'Fase da Resposta em frequência Emitido', 'Frequência (kHz)', 'Fase (radianos)', '#00c8ff');   
     
-    /*
+
     atualizarGraficoLinha(result.channel.responseModule, 'modulo-canal', 'Modulo da resposta em Frequência', 'Frequência (kHz)', 'Amplitude', '#ff0055');    
     atualizarGraficoLinha(result.channel.responsePhase, 'fase-canal', 'Fase da resposta em Frequência', 'Frequência (kHz)', 'Fase (radianos)', '#ff0055');    
-    
+    /*
     atualizarGraficoLinha(result.received.signal, 'sinal-recebido', 'Sinal Recebido', 'Tempo (ms)', 'Amplitude', '#2be331');    
     atualizarGraficoBarras(result.received.amplitude, 'modulo-recebido', 'Módulo da Resposta em frequência Recebido', 'Frequência (kHz)', 'Amplitude', '#2be331');    
     atualizarGraficoBarras(result.received.phase, 'fase-recebido', 'Fase da Resposta em frequência Recebido', 'Frequência (kHz)', 'Fase (radianos)', '#2be331');
@@ -168,7 +168,10 @@ function atualizarGraficoLinha(dados, grafico, nome, xName, yName, cor) {
             name: nome,
             data: dados,
             color: cor,
-            borderColor: 'transparent'
+            borderColor: 'transparent',
+            marker: {
+                enabled: false
+            }
         }]
     });
 }

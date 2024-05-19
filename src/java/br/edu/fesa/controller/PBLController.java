@@ -51,14 +51,19 @@ public class PBLController extends HttpServlet {
     
     private void doCalculus(Result result){
         
+        double frequency = result.getEmitted().getFrequency();
+        
         // Emitted
         result.getEmitted().fillAmplitudeList();
         result.getEmitted().fillPhaseList();
         result.getEmitted().fillSignalList();
         
+        // Channel
+        result.getChannel().fillResponseModule(frequency);
+        result.getChannel().fillResponsePhase(frequency);
         
         // Normalização para exibição
         result.getEmitted().normalizeFrequencyLists();
+        result.getChannel().normalizeFrequencyLists();
     }
-    
 }
