@@ -29,7 +29,6 @@
 
             <section id="section-form" class="p-1">
                 <form id="form" action="PBLController" method="POST">
-                    
                     <div class="d-flex justify-content-evenly align-items-center mb-3">
                         <h4 class="col-2">Dados Entrada:</h4>
                         <div class="form-floating col-4">
@@ -45,17 +44,29 @@
                             </select>
                             <label for="tipoSinal">Selecione o tipo de sinal</label>
                         </div>
-                    </div>
-                    
+                    </div> 
+                            
                     <div class="d-flex justify-content-evenly align-items-center mb-3">
                         <h4 class="col-2">Dados Canal:</h4>
-                        <div class="form-floating col-4">
-                            <input id="frequenciaMin" name="frequenciaMin" type="number" class="form-control" required min="0" max="100" placeholder="Frequência Mínima">
-                            <label for="frequenciaMin">Frequência mínima (kHz)</label>
+                        <div class=" col-4">
+                            <div class="form-check form-switch d-flex justify-content-center mb-2">
+                                <input class="form-check-input" type="checkbox" role="switch" id="passaFaixas" name="passaFaixas">
+                                <label class="form-check-label px-3" for="passaFaixas" id="labelPassaFaixas">Passa-Faixas</label>
+                            </div>
+                            <div class="form-floating">
+                                <input id="frequenciaMin" name="frequenciaMin" type="number" class="form-control" required min="0" max="100" placeholder="Frequência Mínima">
+                                <label for="frequenciaMin">Frequência mínima (kHz)</label>
+                            </div>
                         </div>
-                        <div class="form-floating col-4">
-                            <input id="frequenciaMax" name="frequenciaMax" type="number" class="form-control" required min="0" max="100" placeholder="Frequência Máxima">
-                            <label for="frequenciaMax">Frequência máxima (kHz)</label>
+                        <div class=" col-4">
+                            <div class="form-check form-switch d-flex justify-content-center mb-2">
+                                <input class="form-check-input" type="checkbox" role="switch" id="canalReal" name="canalReal" checked>
+                                <label class="form-check-label px-3" for="canalReal" id="labelTipoCanalReal">Canal Real</label>
+                            </div>
+                            <div class="form-floating">
+                                <input id="frequenciaMax" name="frequenciaMax" type="number" class="form-control" required min="0" max="100" placeholder="Frequência Máxima">
+                                <label for="frequenciaMax">Frequência máxima (kHz)</label>
+                            </div>
                         </div>
                     </div>
                     

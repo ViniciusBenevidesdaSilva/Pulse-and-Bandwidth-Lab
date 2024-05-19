@@ -23,9 +23,9 @@ public class Result {
         this.error = error;
     }
     
-    public Result(double frequency, double minFrequency, double maxFrequency, EnumSignalType signalType) throws IllegalArgumentException{
+    public Result(double frequency, double minFrequency, double maxFrequency, EnumSignalType signalType, boolean isCanalReal) throws IllegalArgumentException{
         this.emitted = Signal.returnSignalByType(signalType, frequency);
-        this.channel = Channel.returnChannelByFrequency(minFrequency, maxFrequency);
+        this.channel = Channel.returnChannelByFrequency(minFrequency, maxFrequency, isCanalReal);
         this.received = Signal.returnSignalByType(signalType, frequency);
     }
 

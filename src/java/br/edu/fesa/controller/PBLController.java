@@ -22,7 +22,6 @@ public class PBLController extends HttpServlet {
         Result result = new Result();
         
         try {
-            
             result = getResultParameters(request);
             doCalculus(result);
             
@@ -46,7 +45,9 @@ public class PBLController extends HttpServlet {
         int signalTypeValue = Integer.parseInt(request.getParameter("tipoSinal"));
         EnumSignalType signalType = EnumSignalType.forInt(signalTypeValue);
         
-        return new Result(frequency, minFrequency, maxFrequency, signalType);
+        boolean isRealChannel = request.getParameter("canalReal") != null;
+        
+        return new Result(frequency, minFrequency, maxFrequency, signalType, isRealChannel);
     }
     
     private void doCalculus(Result result){

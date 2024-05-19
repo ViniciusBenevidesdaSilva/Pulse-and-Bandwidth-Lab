@@ -12,14 +12,16 @@ public abstract class Channel {
     // Props
     protected final double minFrequency;
     protected final double maxFrequency;
-
+    protected final boolean isRealChannel;
+    
     private List<Point> responseModule = new ArrayList<>();
     private List<Point> responsePhase = new ArrayList<>();
 
     // Constructor
-    public Channel(double minFrequency, double maxFrequency) {
+    public Channel(double minFrequency, double maxFrequency, boolean isRealChannel) {
         this.minFrequency = minFrequency;
         this.maxFrequency = maxFrequency;
+        this.isRealChannel = isRealChannel;
     }
 
     // Gets
@@ -79,7 +81,7 @@ public abstract class Channel {
         return 0;
     }
     
-    public static Channel returnChannelByFrequency(double minFrequency, double maxFrequency) throws IllegalArgumentException{
+    public static Channel returnChannelByFrequency(double minFrequency, double maxFrequency, boolean isRealChannel) throws IllegalArgumentException{
         if(maxFrequency <= 0){
             throw new IllegalArgumentException("A Frequência máxima deve ser maior que zero.");
         }
@@ -94,8 +96,8 @@ public abstract class Channel {
         
         
         if(minFrequency == 0)
-            return new LowPassChannel(maxFrequency);
+            return new LowPassChannel(maxFrequency, isRealChannel);
         
-        return new BandpassChannel(minFrequency, maxFrequency);
+        return new BandpassChannel(minFrequency, maxFrequency, isRealChannel);
     }
 }

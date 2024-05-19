@@ -2,6 +2,8 @@
 const form = document.getElementById('form');
 const frequenciaElement = document.getElementById('frequencia');
 const tipoSinalElement = document.getElementById('tipoSinal');
+const passaFaixasElement = document.getElementById('passaFaixas');
+const canalRealElement = document.getElementById('canalReal');
 const frequenciaMinElement = document.getElementById('frequenciaMin');
 const frequenciaMaxElement = document.getElementById('frequenciaMax');
 
@@ -9,18 +11,29 @@ form.addEventListener('submit', function(event){
     event.preventDefault();
     
     try {
-        const formData = new FormData(event.target);
+        const formData = retornaFormData(event);
         
         if(!realizaValidacoes(formData)){
             return;
         }
         
         realizaChamadoServlet(formData);
-       
+        
+        
     } catch(error) {
         alert('Erro ao enviar requisição: ' + error);
     }
 });
+
+function retornaFormData(event){
+    frequenciaMinElement.disabled = false; // Habilito para entrar no form data
+        
+    formData = new FormData(event.target);
+        
+    frequenciaMinElement.disabled = passaFaixasElement.checked;  // Desabilito novamente se necessário
+
+    return formData;
+}
 
 function realizaValidacoes(formData){
     const frequencia = parseFloat(formData.get('frequencia'));
@@ -230,3 +243,23 @@ function atualizarGraficoBarras(dados, grafico, nome, xName, yName, cor) {
         }]
     });
 }
+
+passaFaixasElement.addEventListener('change', function() {
+    const labelTipoCanalFaixa = document.getElementById('labelPassaFaixas');
+    
+    if(passaFaixasElement.checked){
+        labelTipoCanalFaixa.innerHTML = 'Passa-Baixas';
+        frequenciaMinElement.value = 0;
+        frequenciaMinElement.disabled = true;
+    } else {
+        labelTipoCanalFaixa.innerHTML = 'Passa-Faixas';
+        frequenciaMinElement.disabled = false;
+
+    }
+});
+
+canalRealElement.addEventListener('change', function() {
+    const labelTipoCanalReal = document.getElementById('labelTipoCanalReal');
+    
+    labelTipoCanalReal.innerHTML = canalRealElement.checked ? 'Canal Real' : 'Canal Teórico';
+});
