@@ -6,6 +6,7 @@ const passaFaixasElement = document.getElementById('passaFaixas');
 const canalRealElement = document.getElementById('canalReal');
 const frequenciaMinElement = document.getElementById('frequenciaMin');
 const frequenciaMaxElement = document.getElementById('frequenciaMax');
+const phaseUnitElement = document.getElementById('phaseUnit');
 
 var requestResult;
 
@@ -122,17 +123,29 @@ function exibeResult(){
     if(!requestResult)
         return;
     
+    let phaseUnit = phaseUnitElement.value;
+    indiceFase = 180 / Math.PI;
+    
+    // Sinais
     atualizarGraficoLinha(requestResult.emitted.signal, 'sinal-emitido', 'Sinal Emitido', 'Tempo (ms)', 'Amplitude', '#00c8ff');    
-    atualizarGraficoBarras(requestResult.emitted.amplitude, 'modulo-emitido', 'Módulo da Resposta em frequência Emitido', 'Frequência (kHz)', 'Amplitude', '#00c8ff');    
-    atualizarGraficoBarras(requestResult.emitted.phase, 'fase-emitido', 'Fase da Resposta em frequência Emitido', 'Frequência (kHz)', 'Fase (radianos)', '#00c8ff');   
-    
-
-    atualizarGraficoLinha(requestResult.channel.responseModule, 'modulo-canal', 'Modulo da resposta em Frequência', 'Frequência (kHz)', 'Amplitude', '#ff0055');    
-    atualizarGraficoLinha(requestResult.channel.responsePhase, 'fase-canal', 'Fase da resposta em Frequência', 'Frequência (kHz)', 'Fase (radianos)', '#ff0055');    
-    
     atualizarGraficoLinha(requestResult.received.signal, 'sinal-recebido', 'Sinal Recebido', 'Tempo (ms)', 'Amplitude', '#2be331');    
+    
+    // Modulos
+    atualizarGraficoBarras(requestResult.emitted.amplitude, 'modulo-emitido', 'Módulo da Resposta em frequência Emitido', 'Frequência (kHz)', 'Amplitude', '#00c8ff');    
+    atualizarGraficoLinha(requestResult.channel.responseModule, 'modulo-canal', 'Modulo da resposta em Frequência', 'Frequência (kHz)', 'Amplitude', '#ff0055');    
     atualizarGraficoBarras(requestResult.received.amplitude, 'modulo-recebido', 'Módulo da Resposta em frequência Recebido', 'Frequência (kHz)', 'Amplitude', '#2be331');    
-    atualizarGraficoBarras(requestResult.received.phase, 'fase-recebido', 'Fase da Resposta em frequência Recebido', 'Frequência (kHz)', 'Fase (radianos)', '#2be331');
+    
+    // Fases
+
+    if(phaseUnit === 'radianos'){
+        atualizarGraficoBarras(requestResult.emitted.phase, 'fase-emitido', 'Fase da Resposta em frequência Emitido', 'Frequência (kHz)', 'Fase (radianos)', '#00c8ff');   
+        atualizarGraficoLinha(requestResult.channel.responsePhase, 'fase-canal', 'Fase da resposta em Frequência', 'Frequência (kHz)', 'Fase (radianos)', '#ff0055');    
+        atualizarGraficoBarras(requestResult.received.phase, 'fase-recebido', 'Fase da Resposta em frequência Recebido', 'Frequência (kHz)', 'Fase (radianos)', '#2be331');
+    } else {
+        atualizarGraficoBarras(requestResult.emitted.phase.map(obj => ({ x: obj.x, y: obj.y * indiceFase })), 'fase-emitido', 'Fase da Resposta em frequência Emitido', 'Frequência (kHz)', 'Fase (graus)', '#00c8ff');   
+        atualizarGraficoLinha(requestResult.channel.responsePhase.map(obj => ({ x: obj.x, y: obj.y * indiceFase })), 'fase-canal', 'Fase da resposta em Frequência', 'Frequência (kHz)', 'Fase (graus)', '#ff0055');    
+        atualizarGraficoBarras(requestResult.received.phase.map(obj => ({ x: obj.x, y: obj.y * indiceFase })), 'fase-recebido', 'Fase da Resposta em frequência Recebido', 'Frequência (kHz)', 'Fase (graus)', '#2be331');
+    }
 }
 
 function atualizarGraficoLinha(dados, grafico, nome, xName, yName, cor) {
@@ -275,4 +288,8 @@ canalRealElement.addEventListener('change', function() {
     const labelTipoCanalReal = document.getElementById('labelTipoCanalReal');
     
     labelTipoCanalReal.innerHTML = canalRealElement.checked ? 'Canal Real' : 'Canal Teórico';
+});
+
+phaseUnitElement.addEventListener('change', function() {
+    exibeResult();
 });

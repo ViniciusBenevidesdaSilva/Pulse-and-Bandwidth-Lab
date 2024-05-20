@@ -49,7 +49,9 @@
         <footer class="fixed-bottom py-3 border-top bg-light">
             <div class="container d-flex justify-content-between">
                 <p class="text-muted ms-5">Projeto desenvolvido no 7° semestre do curso de Engenharia de Computação</p>
-                <button id="btn-theme"><h4><i id="btn-theme-icon" class="bi bi-sun"></i></h4></button>
+                <div class="d-flex align-items-center">
+                    <button id="btn-theme"><h4><i id="btn-theme-icon" class="bi bi-sun"></i></h4></button>
+                </div>
             </div>
         </footer>
         <!-- Script Bootstrap -->

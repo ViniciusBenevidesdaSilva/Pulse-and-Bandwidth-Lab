@@ -115,9 +115,15 @@
             </section>
         </main>
         <footer class="fixed-bottom py-3 border-top bg-light">
-            <div class="container d-flex justify-content-between">
+            <div class="container d-flex justify-content-between align-items-center">
                 <p class="text-muted ms-5">Projeto desenvolvido no 7° semestre do curso de Engenharia de Computação</p>
-                <button id="btn-theme"><h4><i id="btn-theme-icon" class="bi bi-sun"></i></h4></button>
+                <div class="d-flex align-items-center">
+                    <select class="form-select h-75 me-3 bg-light" id="phaseUnit">
+                        <option value="graus">Graus</option>
+                        <option value="radianos">Radianos</option>
+                    </select>
+                    <button id="btn-theme"><h4><i id="btn-theme-icon" class="bi bi-sun"></i></h4></button>
+                </div>
             </div>
         </footer>
         

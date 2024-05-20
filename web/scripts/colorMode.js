@@ -50,5 +50,3 @@ function loadTheme() {
 
 
 window.addEventListener("load", loadTheme);
-
-
