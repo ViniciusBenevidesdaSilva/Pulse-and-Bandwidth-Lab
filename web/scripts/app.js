@@ -7,6 +7,8 @@ const canalRealElement = document.getElementById('canalReal');
 const frequenciaMinElement = document.getElementById('frequenciaMin');
 const frequenciaMaxElement = document.getElementById('frequenciaMax');
 
+var requestResult;
+
 form.addEventListener('submit', function(event){
     event.preventDefault();
     
@@ -104,7 +106,8 @@ function realizaChamadoServlet(formData){
             if(result.error){
                 alert('Erro do servidor: ' + result.error);
             } else {
-                exibeResult(result);
+                requestResult = result;
+                exibeResult();
             }
         } else {
             alert('Erro ao enviar requisição: ' + xhr.statusText);
@@ -115,46 +118,52 @@ function realizaChamadoServlet(formData){
     xhr.send(encodedFormData);
 }
 
-function exibeResult(result){
-    atualizarGraficoLinha(result.emitted.signal, 'sinal-emitido', 'Sinal Emitido', 'Tempo (ms)', 'Amplitude', '#00c8ff');    
-    atualizarGraficoBarras(result.emitted.amplitude, 'modulo-emitido', 'Módulo da Resposta em frequência Emitido', 'Frequência (kHz)', 'Amplitude', '#00c8ff');    
-    atualizarGraficoBarras(result.emitted.phase, 'fase-emitido', 'Fase da Resposta em frequência Emitido', 'Frequência (kHz)', 'Fase (radianos)', '#00c8ff');   
+function exibeResult(){
+    if(!requestResult)
+        return;
+    
+    atualizarGraficoLinha(requestResult.emitted.signal, 'sinal-emitido', 'Sinal Emitido', 'Tempo (ms)', 'Amplitude', '#00c8ff');    
+    atualizarGraficoBarras(requestResult.emitted.amplitude, 'modulo-emitido', 'Módulo da Resposta em frequência Emitido', 'Frequência (kHz)', 'Amplitude', '#00c8ff');    
+    atualizarGraficoBarras(requestResult.emitted.phase, 'fase-emitido', 'Fase da Resposta em frequência Emitido', 'Frequência (kHz)', 'Fase (radianos)', '#00c8ff');   
     
 
-    atualizarGraficoLinha(result.channel.responseModule, 'modulo-canal', 'Modulo da resposta em Frequência', 'Frequência (kHz)', 'Amplitude', '#ff0055');    
-    atualizarGraficoLinha(result.channel.responsePhase, 'fase-canal', 'Fase da resposta em Frequência', 'Frequência (kHz)', 'Fase (radianos)', '#ff0055');    
+    atualizarGraficoLinha(requestResult.channel.responseModule, 'modulo-canal', 'Modulo da resposta em Frequência', 'Frequência (kHz)', 'Amplitude', '#ff0055');    
+    atualizarGraficoLinha(requestResult.channel.responsePhase, 'fase-canal', 'Fase da resposta em Frequência', 'Frequência (kHz)', 'Fase (radianos)', '#ff0055');    
     
-    atualizarGraficoLinha(result.received.signal, 'sinal-recebido', 'Sinal Recebido', 'Tempo (ms)', 'Amplitude', '#2be331');    
-    atualizarGraficoBarras(result.received.amplitude, 'modulo-recebido', 'Módulo da Resposta em frequência Recebido', 'Frequência (kHz)', 'Amplitude', '#2be331');    
-    atualizarGraficoBarras(result.received.phase, 'fase-recebido', 'Fase da Resposta em frequência Recebido', 'Frequência (kHz)', 'Fase (radianos)', '#2be331');
+    atualizarGraficoLinha(requestResult.received.signal, 'sinal-recebido', 'Sinal Recebido', 'Tempo (ms)', 'Amplitude', '#2be331');    
+    atualizarGraficoBarras(requestResult.received.amplitude, 'modulo-recebido', 'Módulo da Resposta em frequência Recebido', 'Frequência (kHz)', 'Amplitude', '#2be331');    
+    atualizarGraficoBarras(requestResult.received.phase, 'fase-recebido', 'Fase da Resposta em frequência Recebido', 'Frequência (kHz)', 'Fase (radianos)', '#2be331');
 }
 
 function atualizarGraficoLinha(dados, grafico, nome, xName, yName, cor) {
+    
+    const fontColor = colorMode === 'dark' ? '#f8f9fa' : '#454545';
+    
     var chart = Highcharts.chart(grafico, {
         chart: {
             type: 'line',
-            backgroundColor: '#343a40',
+            backgroundColor: 'transparent',
             style: {
                 fontFamily: 'Arial, sans-serif',
-                color: '#f8f9fa'
+                color: fontColor
             }
         },
         title: {
             text: nome,
             style: {
-                color: '#f8f9fa'
+                color: fontColor
             }
         },
         xAxis: {
             title: {
                 text: xName,
                 style: {
-                    color: '#f8f9fa'
+                    color: fontColor
                 }
             },
             labels: {
                 style: {
-                    color: '#f8f9fa'
+                    color: fontColor
                 }
             }
         },
@@ -162,18 +171,18 @@ function atualizarGraficoLinha(dados, grafico, nome, xName, yName, cor) {
             title: {
                 text: yName,
                 style: {
-                    color: '#f8f9fa'
+                    color: fontColor
                 }
             },
             labels: {
                 style: {
-                    color: '#f8f9fa'
+                    color: fontColor
                 }
             }
         },
         legend: {
             style: {
-                color: '#f8f9fa'
+                color: fontColor
             }
         },
         series: [{
@@ -189,31 +198,34 @@ function atualizarGraficoLinha(dados, grafico, nome, xName, yName, cor) {
 }
 
 function atualizarGraficoBarras(dados, grafico, nome, xName, yName, cor) {
+    
+    const fontColor = colorMode === 'dark' ? '#f8f9fa' : '#454545';
+    
     var chart = Highcharts.chart(grafico, {
         chart: {
             type: 'column',
-            backgroundColor: '#343a40',
+            backgroundColor: 'transparent',
             style: {
                 fontFamily: 'Arial, sans-serif',
-                color: '#f8f9fa' 
+                color: fontColor
             }
         },
         title: {
             text: nome,
             style: {
-                color: '#f8f9fa'
+                color: fontColor
             }
         },
         xAxis: {
             title: {
                 text: xName,
                 style: {
-                    color: '#f8f9fa'
+                    color: fontColor
                 }
             },
             labels: {
                 style: {
-                    color: '#f8f9fa'
+                    color: fontColor
                 }
             }
         },
@@ -221,18 +233,18 @@ function atualizarGraficoBarras(dados, grafico, nome, xName, yName, cor) {
             title: {
                 text: yName,
                 style: {
-                    color: '#f8f9fa'
+                    color: fontColor
                 }
             },
             labels: {
                 style: {
-                    color: '#f8f9fa'
+                    color: fontColor
                 }
             }
         },
         legend: {
             style: {
-                color: '#f8f9fa'
+                color: fontColor
             }
         },
         series: [{
@@ -253,6 +265,7 @@ passaFaixasElement.addEventListener('change', function() {
         frequenciaMinElement.disabled = true;
     } else {
         labelTipoCanalFaixa.innerHTML = 'Passa-Faixas';
+        frequenciaMinElement.value = '';
         frequenciaMinElement.disabled = false;
 
     }

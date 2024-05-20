@@ -18,15 +18,32 @@
         <!-- highcharts.js -->
         <script src="https://code.highcharts.com/highcharts.js"></script>
     </head>
-    <body data-bs-theme="dark">
-    <%
-        HashMap<Integer, String> signalTypes = EnumSignalType.getSignalTypes();
-    %>
-
-        <main class="container">
-            
+    <body>
+        <%
+            HashMap<Integer, String> signalTypes = EnumSignalType.getSignalTypes();
+        %>
+        <nav class="navbar navbar-expand-lg border-bottom bg-light fixed-top">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item ps-3">
+                            <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/">Home</a>
+                        </li>
+                        <li class="nav-item ps-3">
+                            <a class="nav-link active" aria-current="page" href="#">Laboratório</a>
+                        </li>
+                        <li class="nav-item ps-3">
+                            <a class="nav-link" aria-current="page" href="about.jsp">Sobre</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <main class="container my-5 py-5">
             <h1 class="my-5">Project-Based Learning</h1>
-
             <section id="section-form" class="p-1">
                 <form id="form" action="PBLController" method="POST">
                     <div class="d-flex justify-content-evenly align-items-center mb-3">
@@ -97,10 +114,16 @@
                 </div>
             </section>
         </main>
+        <footer class="fixed-bottom py-3 border-top bg-light">
+            <div class="container d-flex justify-content-between">
+                <p class="text-muted ms-5">Projeto desenvolvido no 7° semestre do curso de Engenharia de Computação</p>
+                <button id="btn-theme"><h4><i id="btn-theme-icon" class="bi bi-sun"></i></h4></button>
+            </div>
+        </footer>
         
-        
-        <script src="../scripts/app.js"></script>
         <!-- Script Bootstrap -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="../scripts/colorMode.js"></script>
+        <script src="../scripts/app.js"></script>
     </body>
 </html>

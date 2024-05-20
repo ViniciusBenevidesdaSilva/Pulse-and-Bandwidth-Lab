@@ -7,6 +7,20 @@ main {
     align-items: center;
 }
 
+#home-graficos {
+    width: 100vw;
+    
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.grafico-exemplo {
+    max-height: 30vh;
+    max-width: 30vw;
+}
+
 #section-form {
     width: 75vw;
 }
@@ -23,4 +37,9 @@ main {
     max-height: 40vh;
     max-width: 50vw;
     padding: 2vh 2vw;
+}
+
+#btn-theme{
+    border: none;
+    background: none;
 }
