@@ -43,7 +43,7 @@
             </div>
         </nav>
         <main class="container my-5 py-5">
-            <h1 class="my-5">Project-Based Learning</h1>
+            <h1 class="my-5">Pulse and Bandwidth Lab</h1>
             <section id="section-form" class="p-1">
                 <form id="form" action="PBLController" method="POST">
                     <div class="d-flex justify-content-evenly align-items-center mb-3">
@@ -88,7 +88,8 @@
                     </div>
                     
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-secondary mt-2">Calcular</button>
+                        <button type="submit" class="btn btn-secondary mt-2 mx-2">Calcular</button>
+                        <a id="btn-relatorio" href="relatorio.jsp" class="btn btn-outline-secondary mt-2 mx-2 d-none">Gerar Relatório</a>
                     </div>
                 </form>
             </section>

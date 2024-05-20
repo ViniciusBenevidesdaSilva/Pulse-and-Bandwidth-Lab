@@ -36,8 +36,8 @@ function exibeResult(){
     if(!requestResult)
         return;
     
-    atualizarGraficoLinha(requestResult.emitted.signal, 'exemplo-entrada', 'Sinal Emitido', 'Tempo (ms)', 'Amplitude', '#00c8ff');
-    atualizarGraficoLinha(requestResult.received.signal, 'exemplo-saida', 'Sinal Recebido', 'Tempo (ms)', 'Amplitude', '#2be331');    
+    atualizarGraficoLinha(requestResult.emitted.signal, 'exemplo-entrada', 'Sinal Emitido', 'Tempo (ms)', 'Amplitude', '#00A400');
+    atualizarGraficoLinha(requestResult.received.signal, 'exemplo-saida', 'Sinal Recebido', 'Tempo (ms)', 'Amplitude', '#0D6EFD');    
 }
 
 function atualizarGraficoLinha(dados, grafico, nome, xName, yName, cor) {
