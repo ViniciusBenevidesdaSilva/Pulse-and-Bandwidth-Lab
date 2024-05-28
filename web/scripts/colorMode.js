@@ -26,6 +26,16 @@ function changeTheme(){
         element.classList.remove(oldClass);
         element.classList.add(newClass);
     });
+       
+    oldClass = colorMode === 'light' ? 'accordion-button-dark' : 'accordion-button-light';
+    newClass = colorMode === 'light' ? 'accordion-button-light' : 'accordion-button-dark';
+    
+    elements = document.querySelectorAll('.' + oldClass);
+    
+    elements.forEach(function(element) {
+        element.classList.remove(oldClass);
+        element.classList.add(newClass);
+    });
     
     // Gráficos
     if (typeof exibeResult === 'function') {

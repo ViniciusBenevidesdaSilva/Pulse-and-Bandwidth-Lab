@@ -21,8 +21,8 @@ main {
     max-width: 30vw;
 }
 
-#section-form {
-    width: 75vw;
+#accordionForm{
+    width: 50vw;
 }
 
 #section-form input, select{
@@ -42,4 +42,22 @@ main {
 #btn-theme{
     border: none;
     background: none;
+}
+
+.bg-dark {
+    background-color: #000A0D !important;
+}
+
+.accordion-button {
+    box-shadow: none !important;
+}
+
+.accordion-button-light {
+    color: black !important;
+    background: #7bc4d4 !important;
+}
+
+.accordion-button-dark {
+    color: white !important;
+    background: #143840 !important;
 }

@@ -15,7 +15,7 @@
         <!-- highcharts.js -->
         <script src="https://code.highcharts.com/highcharts.js"></script>
     </head>
-    <body data-bs-theme="light">
+    <body data-bs-theme="light" class="bg-light">
         <nav class="navbar navbar-expand-lg border-bottom bg-light fixed-top">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

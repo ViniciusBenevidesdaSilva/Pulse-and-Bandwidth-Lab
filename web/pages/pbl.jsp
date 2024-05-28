@@ -18,7 +18,7 @@
         <!-- highcharts.js -->
         <script src="https://code.highcharts.com/highcharts.js"></script>
     </head>
-    <body>
+    <body class="bg-light">
         <%
             HashMap<Integer, String> signalTypes = EnumSignalType.getSignalTypes();
         %>
@@ -44,56 +44,64 @@
         </nav>
         <main class="container my-5 py-5">
             <h1 class="my-5">Pulse and Bandwidth Lab</h1>
-            <section id="section-form" class="p-1">
-                <form id="form" action="PBLController" method="POST">
-                    <div class="d-flex justify-content-evenly align-items-center mb-3">
-                        <h4 class="col-2">Dados Entrada:</h4>
-                        <div class="form-floating col-4">
-                            <input id="frequencia" name="frequencia" type="number" class="form-control" required min="1" max="100" placeholder="Frequência [kHz]">
-                            <label for="frequencia">Informe a frequência (kHz)</label>
-                        </div>
-                        <div class="form-floating col-4">
-                            <select id="tipoSinal" name="tipoSinal" class="form-select my-2" aria-label="Tipo de Sinal" required>
-                                <option value="" disabled selected hidden>Selecione um tipo de sinal</option>
-                                <% for (Map.Entry<Integer, String> type : signalTypes.entrySet()) { %>
-                                <option value="<%= type.getKey() %>"><%= type.getValue() %></option>
-                                <% } %>
-                            </select>
-                            <label for="tipoSinal">Selecione o tipo de sinal</label>
-                        </div>
-                    </div> 
-                            
-                    <div class="d-flex justify-content-evenly align-items-center mb-3">
-                        <h4 class="col-2">Dados Canal:</h4>
-                        <div class=" col-4">
-                            <div class="form-check form-switch d-flex justify-content-center mb-2">
-                                <input class="form-check-input" type="checkbox" role="switch" id="passaFaixas" name="passaFaixas">
-                                <label class="form-check-label px-3" for="passaFaixas" id="labelPassaFaixas">Passa-Faixas</label>
-                            </div>
-                            <div class="form-floating">
-                                <input id="frequenciaMin" name="frequenciaMin" type="number" class="form-control" required min="0" max="100" placeholder="Frequência Mínima">
-                                <label for="frequenciaMin">Frequência mínima (kHz)</label>
-                            </div>
-                        </div>
-                        <div class=" col-4">
-                            <div class="form-check form-switch d-flex justify-content-center mb-2">
-                                <input class="form-check-input" type="checkbox" role="switch" id="canalReal" name="canalReal" checked>
-                                <label class="form-check-label px-3" for="canalReal" id="labelTipoCanalReal">Canal Real</label>
-                            </div>
-                            <div class="form-floating">
-                                <input id="frequenciaMax" name="frequenciaMax" type="number" class="form-control" required min="0" max="100" placeholder="Frequência Máxima">
-                                <label for="frequenciaMax">Frequência máxima (kHz)</label>
-                            </div>
+            <section class="accordion" id="accordionForm">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button id="btn-collapse-form" class="accordion-button accordion-button-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseForm" aria-expanded="true" aria-controls="collapseForm">
+                            Dados Simulação 
+                        </button>
+                    </h2>
+                    <div id="collapseForm" class="accordion-collapse collapse show bg-light" data-bs-parent="#accordionForm">
+                        <div class="accordion-body">
+                            <form id="form" action="PBLController" method="POST">
+                                <h4>Sinal Emitido:</h4>
+                                <div class="d-flex flex-wrap justify-content-evenly align-items-center mb-3">
+                                    <div class="form-floating col-4">
+                                        <input id="frequencia" name="frequencia" type="number" class="form-control bg-light" required min="1" max="100" placeholder="Frequência [kHz]">
+                                        <label for="frequencia">Informe a frequência (kHz)</label>
+                                    </div>
+                                    <div class="form-floating col-4">
+                                        <select id="tipoSinal" name="tipoSinal" class="form-select my-2 bg-light" aria-label="Tipo de Sinal" required>
+                                            <option value="" disabled selected hidden>Selecione um tipo de sinal</option>
+                                            <% for (Map.Entry<Integer, String> type : signalTypes.entrySet()) { %>
+                                            <option value="<%= type.getKey() %>"><%= type.getValue() %></option>
+                                            <% } %>
+                                        </select>
+                                        <label for="tipoSinal">Selecione o tipo de sinal</label>
+                                    </div>
+                                </div>
+                                <h4>Dados Canal:</h4>
+                                <div class="d-flex justify-content-evenly align-items-center mb-3">
+                                    <div class=" col-4">
+                                        <div class="form-floating">
+                                            <input id="frequenciaMin" name="frequenciaMin" type="number" class="form-control bg-light" required min="0" max="100" placeholder="Frequência Mínima">
+                                            <label for="frequenciaMin">Frequência mínima (kHz)</label>
+                                        </div>
+                                        <div class="form-check form-switch d-flex flex-wrap justify-content-center mt-2">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="passaFaixas" name="passaFaixas">
+                                            <label class="form-check-label px-3" for="passaFaixas" id="labelPassaFaixas">Passa-Faixas</label>
+                                        </div>
+                                    </div>
+                                    <div class=" col-4">
+                                        <div class="form-floating">
+                                            <input id="frequenciaMax" name="frequenciaMax" type="number" class="form-control bg-light" required min="0" max="100" placeholder="Frequência Máxima">
+                                            <label for="frequenciaMax">Frequência máxima (kHz)</label>
+                                        </div>
+                                        <div class="form-check form-switch d-flex justify-content-center mt-2">
+                                                    <input class="form-check-input" type="checkbox" role="switch" id="canalReal" name="canalReal" checked>
+                                                    <label class="form-check-label px-3" for="canalReal" id="labelTipoCanalReal">Canal Real</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-wrap justify-content-center">
+                                    <button type="submit" class="btn btn-outline-success mt-2 mx-2">Calcular</button>
+                                    <a id="btn-relatorio" href="relatorio.jsp" class="btn btn-outline-primary mt-2 mx-2 d-none">Gerar Relatório</a>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-secondary mt-2 mx-2">Calcular</button>
-                        <a id="btn-relatorio" href="relatorio.jsp" class="btn btn-outline-secondary mt-2 mx-2 d-none">Gerar Relatório</a>
-                    </div>
-                </form>
+                </div>
             </section>
-            
             <section id="graficos" class="text-center mt-5">
                 <div class="d-flex justify-content-evenly align-items-center">
                     <div id="sinal-emitido" class="grafico"></div>             

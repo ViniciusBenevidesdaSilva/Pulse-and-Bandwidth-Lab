@@ -110,6 +110,7 @@ function realizaChamadoServlet(formData){
             } else {
                 requestResult = result;
                 exibeResult();
+                document.getElementById("btn-collapse-form").click();
             }
         } else {
             alert('Erro ao enviar requisição: ' + xhr.statusText);
