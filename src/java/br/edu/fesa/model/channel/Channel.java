@@ -41,7 +41,7 @@ public abstract class Channel {
     
     // Método que, após a realização dos cálculos, exibe apenas os 10 primeiros valores de amplitude e fase por frequência
     public void normalizeFrequencyLists(){
-        int elementQuantity = Math.min(50, Const.HARMONIC);
+        int elementQuantity = Math.min(100, Const.HARMONIC);
         
         responseModule = responseModule.subList(0, elementQuantity);
         responsePhase = responsePhase.subList(0, elementQuantity);
@@ -57,7 +57,7 @@ public abstract class Channel {
     public void fillResponseModule(double frequencyStep){
         responseModule.clear();
         double responseModuleValue;
-        for(int frequency = 0; frequency <= Const.HARMONIC * frequencyStep; frequency++){
+        for(double frequency = 0; frequency <= Const.HARMONIC * frequencyStep; frequency += 0.5){
             responseModuleValue = returnResponseModule(frequency);
             insertPointAt(responseModule, frequency, responseModuleValue);
         }
@@ -71,7 +71,7 @@ public abstract class Channel {
     public void fillResponsePhase(double frequencyStep){
         responsePhase.clear();
         double responsePhaseValue;
-        for(int frequency = 0; frequency <= Const.HARMONIC * frequencyStep; frequency++){
+        for(double frequency = 0; frequency <= Const.HARMONIC * frequencyStep; frequency += 0.5){
             responsePhaseValue = returnResponsePhase(frequency);
             insertPointAt(responsePhase, frequency, responsePhaseValue);
         }
