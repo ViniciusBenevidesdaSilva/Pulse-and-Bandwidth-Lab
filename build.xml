@@ -11,42 +11,30 @@
     <description>Builds, tests, and runs the project PulseBandwidthLab.</description>
     
     <!-- Propriedades para diretórios -->
+    <property name="src.dir" location="src"/>
+    <property name="build.dir" location="build"/>
+    <property name="classes.dir" location="${build.dir}/classes"/>
     <property name="lib.dir" location="lib"/>
     <property name="gson.jar" location="${lib.dir}/gson-2.10.1.jar"/>
-    <property name="build.classes.dir" location="build/classes"/>
     
-    <!-- Importando o build padrão do NetBeans -->
-    <import file="nbproject/build-impl.xml"/>
+    <!-- Criação dos diretórios necessários -->
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${classes.dir}"/>
+    </target>
     
-    <!-- Definindo a tarefa de copiar bibliotecas -->
-    <target name="-pre-compile">
-        <mkdir dir="${build.classes.dir}"/>
-        <copy file="${gson.jar}" todir="${build.classes.dir}"/>
+    <!-- Compilação do código-fonte -->
+    <target name="compile" depends="init">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}">
+            <classpath>
+                <pathelement location="${gson.jar}"/>
+            </classpath>
+        </javac>
     </target>
-
-    <!-- Sobrescrevendo a macro de compilação para incluir o JAR no classpath -->
-    <target name="-init-macrodef-javac">
-        <macrodef name="javac">
-            <attribute name="srcdir"/>
-            <attribute name="destdir"/>
-            <element name="classpath" optional="true"/>
-            <element name="src" optional="true"/>
-            <sequential>
-                <javac srcdir="@{srcdir}" destdir="@{destdir}" debug="true" deprecation="false" nowarn="false">
-                    <classpath>
-                        <pathelement path="${javac.classpath}"/>
-                        <pathelement path="${gson.jar}"/>
-                        <classpath/>
-                    </classpath>
-                    <src path="@{src}"/>
-                </javac>
-            </sequential>
-        </macrodef>
-    </target>
-
-    <!-- Definindo a tarefa de compilação personalizada -->
-    <target name="custom-compile" depends="init,-pre-compile,-init-macrodef-javac,compile">
-        <echo message="Compilação personalizada concluída."/>
+    
+    <!-- Tarefa principal -->
+    <target name="default" depends="compile">
+        <echo message="Compilação concluída com sucesso."/>
     </target>
     <!--
 
