@@ -9,7 +9,39 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="PulseBandwidthLab" default="default" basedir=".">
     <description>Builds, tests, and runs the project PulseBandwidthLab.</description>
+    
+    <!-- Definindo propriedades para diretórios -->
+    <property name="lib.dir" location="lib"/>
+    <property name="gson.jar" location="${lib.dir}/gson-2.10.1.jar"/>
+    
+    <!-- Importando o build padrão do NetBeans -->
     <import file="nbproject/build-impl.xml"/>
+    
+    <!-- Tarefa para garantir que o JAR do gson está no classpath -->
+    <target name="-pre-compile">
+        <mkdir dir="${build.classes.dir}"/>
+        <copy file="${gson.jar}" todir="${build.classes.dir}"/>
+    </target>
+
+    <!-- Sobrescrevendo a macro de compilação para incluir o JAR no classpath -->
+    <target name="-init-macrodef-javac">
+        <macrodef name="javac">
+            <attribute name="srcdir"/>
+            <attribute name="destdir"/>
+            <element name="classpath" optional="true"/>
+            <element name="src" optional="true"/>
+            <sequential>
+                <javac srcdir="@{srcdir}" destdir="@{destdir}" debug="true" deprecation="false" nowarn="false">
+                    <classpath>
+                        <pathelement path="${javac.classpath}"/>
+                        <pathelement path="${gson.jar}"/>
+                        <classpath/>
+                    </classpath>
+                    <src path="@{src}"/>
+                </javac>
+            </sequential>
+        </macrodef>
+    </target>
     <!--
 
     There exist several targets which are by default empty and which can be 
