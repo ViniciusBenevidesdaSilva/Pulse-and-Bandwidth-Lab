@@ -21,9 +21,15 @@ jobs:
         with:
           java-version: '17'
 
-      - name: Set up Ant
-        run: sudo apt-get install ant
-        
+      - name: Install Chocolatey
+        run: |
+          Set-ExecutionPolicy Bypass -Scope Process -Force; 
+          [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; 
+          iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+      - name: Install Ant
+        run: choco install ant -y
+
       - name: Build with Ant
         run: ant
 
