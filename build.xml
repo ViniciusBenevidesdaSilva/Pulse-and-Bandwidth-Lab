@@ -10,14 +10,15 @@
 <project name="PulseBandwidthLab" default="default" basedir=".">
     <description>Builds, tests, and runs the project PulseBandwidthLab.</description>
     
-    <!-- Definindo propriedades para diretórios -->
+    <!-- Propriedades para diretórios -->
     <property name="lib.dir" location="lib"/>
     <property name="gson.jar" location="${lib.dir}/gson-2.10.1.jar"/>
+    <property name="build.classes.dir" location="build/classes"/>
     
     <!-- Importando o build padrão do NetBeans -->
     <import file="nbproject/build-impl.xml"/>
     
-    <!-- Tarefa para garantir que o JAR do gson está no classpath -->
+    <!-- Definindo a tarefa de copiar bibliotecas -->
     <target name="-pre-compile">
         <mkdir dir="${build.classes.dir}"/>
         <copy file="${gson.jar}" todir="${build.classes.dir}"/>
@@ -41,6 +42,11 @@
                 </javac>
             </sequential>
         </macrodef>
+    </target>
+
+    <!-- Definindo a tarefa de compilação personalizada -->
+    <target name="custom-compile" depends="init,-pre-compile,-init-macrodef-javac,compile">
+        <echo message="Compilação personalizada concluída."/>
     </target>
     <!--
 
