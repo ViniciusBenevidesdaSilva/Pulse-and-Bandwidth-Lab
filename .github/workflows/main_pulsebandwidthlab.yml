@@ -31,7 +31,7 @@ jobs:
         run: choco install ant -y
 
       - name: Build with Ant
-        run: ant
+        run: ant custom-compile
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
