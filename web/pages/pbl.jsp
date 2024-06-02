@@ -56,26 +56,26 @@
                             <form id="form" action="PBLController" method="POST">
                                 <h4>Sinal Emitido:</h4>
                                 <div class="d-flex flex-wrap justify-content-evenly align-items-center mb-3">
-                                    <div class="form-floating col-4">
-                                        <input id="frequencia" name="frequencia" type="number" class="form-control bg-light" required min="1" max="100" placeholder="Frequência [kHz]">
+                                    <div class="col-4">
                                         <label for="frequencia">Informe a frequência (kHz)</label>
+                                        <input id="frequencia" name="frequencia" type="number" class="form-control bg-light my-2" required min="1" max="100" placeholder="1 kHz">
                                     </div>
-                                    <div class="form-floating col-4">
+                                    <div class="col-4">
+                                        <label for="tipoSinal">Formato do sinal</label>
                                         <select id="tipoSinal" name="tipoSinal" class="form-select my-2 bg-light" aria-label="Tipo de Sinal" required>
                                             <option value="" disabled selected hidden>Selecione um tipo de sinal</option>
                                             <% for (Map.Entry<Integer, String> type : signalTypes.entrySet()) { %>
                                             <option value="<%= type.getKey() %>"><%= type.getValue() %></option>
                                             <% } %>
                                         </select>
-                                        <label for="tipoSinal">Selecione o tipo de sinal</label>
                                     </div>
                                 </div>
                                 <h4>Dados Canal:</h4>
                                 <div class="d-flex justify-content-evenly align-items-center mb-3">
                                     <div class=" col-4">
-                                        <div class="form-floating">
-                                            <input id="frequenciaMin" name="frequenciaMin" type="number" class="form-control bg-light" required min="0" max="100" placeholder="Frequência Mínima">
+                                        <div>
                                             <label for="frequenciaMin">Frequência mínima (kHz)</label>
+                                            <input id="frequenciaMin" name="frequenciaMin" type="number" class="form-control bg-light my-2" required min="0" max="100" placeholder="0 kHz">
                                         </div>
                                         <div class="form-check form-switch d-flex flex-wrap justify-content-center mt-2">
                                             <input class="form-check-input" type="checkbox" role="switch" id="passaFaixas" name="passaFaixas">
@@ -83,13 +83,13 @@
                                         </div>
                                     </div>
                                     <div class=" col-4">
-                                        <div class="form-floating">
-                                            <input id="frequenciaMax" name="frequenciaMax" type="number" class="form-control bg-light" required min="0" max="100" placeholder="Frequência Máxima">
+                                        <div>
                                             <label for="frequenciaMax">Frequência máxima (kHz)</label>
+                                            <input id="frequenciaMax" name="frequenciaMax" type="number" class="form-control bg-light my-2" required min="0" max="100" placeholder="100 kHz">
                                         </div>
                                         <div class="form-check form-switch d-flex justify-content-center mt-2">
-                                                    <input class="form-check-input" type="checkbox" role="switch" id="canalReal" name="canalReal" checked>
-                                                    <label class="form-check-label px-3" for="canalReal" id="labelTipoCanalReal">Canal Real</label>
+                                            <input class="form-check-input" type="checkbox" role="switch" id="canalReal" name="canalReal" checked>
+                                            <label class="form-check-label px-3" for="canalReal" id="labelTipoCanalReal">Canal Real</label>
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +102,7 @@
                     </div>
                 </div>
             </section>
-            <section id="graficos" class="text-center mt-5">
+            <section id="graficos" class="container text-center mt-5">
                 <div class="d-flex justify-content-evenly align-items-center">
                     <div id="sinal-emitido" class="grafico"></div>             
                 </div>
